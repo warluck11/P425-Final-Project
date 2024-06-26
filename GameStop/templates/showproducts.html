@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 align="center">Games</h1>
+
+    <table border="1" align="center" style="width: 70%;">
+
+
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Cart</th>
+
+        {% if request.user.is_staff %}
+
+            <th>Update</th>
+            <th>Delete</th>
+
+        {% endif %}
+        </tr>
+
+        {% for x in data %}
+
+        <tr>
+            <td><img src="{{ x.image.url }}" style="height: 250px; width: 250px;"></td>
+            <td><a href="/product/details/{{ x.id }}">{{ x.name }}</a></td>
+            <td>{{ x.price }}</td>
+            <td><a href="/add_to_cart/{{ x.id }}">Add to Cart</a></td>
+
+            {% if request.user.is_staff %}
+
+            <td><a href="/products/edit/{{ x.id }}">Update</a></td>
+            <td><a href="/products/delete/{{ x.id }}">Delete</a></td>
+
+            {% endif %}
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+
+    <h3 align="center"><a href="/">Home</a></h3>
+
+
+</body>
+</html>
+
